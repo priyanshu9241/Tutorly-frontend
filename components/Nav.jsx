@@ -7,7 +7,7 @@ export default function Nav() {
     <header className="bg-primary text-primary-foreground">
       <div className="container md:pl-4  py-6 md:py-8 flex items-center justify-between">
         <Link
-          href="/"
+          href="../."
           className="flex items-center gap-2 font-semibold text-xl"
           prefetch={false}
         >
