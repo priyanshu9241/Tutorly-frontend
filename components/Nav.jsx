@@ -45,12 +45,12 @@ export default function Nav() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <Link asChild href="sign-in" prefetch={false}>
+          <Link href="sign-in" prefetch={false}>
             <Button variant="pro" size="sm">
               Sign In
             </Button>
           </Link>
-          <Link asChild href="sign-up" prefetch={false}>
+          <Link href="sign-up" prefetch={false}>
             <Button variant="pro" size="sm">
               Sign Up
             </Button>

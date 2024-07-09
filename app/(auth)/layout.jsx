@@ -2,7 +2,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import frameImg from "@/public/frame.png";
-export default function layout({ children }) {
+export default function Layout({ children }) {
   const pathname = usePathname();
   // console.log(pathname);
   const imgPath = pathname === "/sign-up" ? "/signup.webp" : "/login.webp";
