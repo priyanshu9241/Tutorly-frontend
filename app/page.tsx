@@ -251,16 +251,16 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col ">
+    <main className="flex min-h-screen flex-col">
       <div className="min-h-screen bg-background text-foreground">
         <main>
-          <section className="bg-primary py-12 md:py-20">
-            <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
+          <section className="bg-primary py-12 md:py-20 px-4">
+            <div className="flex flex-col lg:flex-row lg:justify-between	 space-y-12 items-center">
+              <div className="space-y-8 text-center px-10">
+                <h1 className="text-3xl font-bold tracking-tight text-white md:text-6xl">
                   Find the Perfect Tutor for You
                 </h1>
-                <p className="text-primary-foreground/80 max-w-md">
+                <p className="text-primary-foreground/80  text-center w-full">
                   Browse our network of experienced tutors and find the right
                   one to help you achieve your academic goals.
                 </p>
@@ -275,13 +275,15 @@ export default function Home() {
                   </Button>
                 </form>
               </div>
-              <img
-                src="/tutor2.jpg"
-                width={600}
-                height={400}
-                alt="Hero Image"
-                className="rounded-xl object-cover"
-              />
+              <div>
+                <img
+                  src="/tutor2.jpg"
+                  width={600}
+                  height={400}
+                  alt="Hero Image"
+                  className="rounded-xl object-cover"
+                />
+              </div>
             </div>
           </section>
           <section className="py-12 md:py-20">
@@ -314,8 +316,17 @@ export default function Home() {
             </div>
           </section>
           <section className="bg-muted py-12 md:py-20">
-            <div className="container px-4 md:px-6">
+            <div className=" px-4 md:px-6">
               <div className="grid md:grid-cols-2 gap-8">
+              <div className="flex items-center justify-center">
+                  <img
+                    src="/tutor1.jpg"
+                    width={500}
+                    height={400}
+                    alt="Why Choose Tutorly"
+                    className="rounded-xl object-cover"
+                  />
+                </div>
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight mb-4">
                     Why Choose Tutorly?
@@ -352,15 +363,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center justify-center">
-                  <img
-                    src="/tutor1.jpg"
-                    width={500}
-                    height={400}
-                    alt="Why Choose Tutorly"
-                    className="rounded-xl object-cover"
-                  />
+               
                 </div>
               </div>
             </div>
