@@ -1,40 +1,60 @@
-"use client"
-import { useState } from "react"
+"use client";
+import { useState } from "react";
 import Link from "next/link";
-import Image from 'next/image'
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import Image from "next/image";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // import { useDispatch } from "react-redux"
+import Tab from "@/components/Tab";
 
-import { useRouter } from 'next/navigation'
-export default  function LoginForm() {
-const router=useRouter()
+import { useRouter } from "next/navigation";
+export default function LoginForm() {
+  const router = useRouter();
+  const [accountType, setAccountType] = useState("student");
+
   // const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
+  });
 
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
 
-  const { email, password } = formData
+  const { email, password } = formData;
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault()
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const reqUrl =
+      process.env.NEXT_PUBLIC_API_URL +
+      (accountType === "tutor"
+        ? "/api/v1/studentsAuth/login"
+        : "/api/v1/tutorAuth/login");
+    // console.log(reqUrl);
+    const res = await fetch(reqUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    // const data = await res.json();
+    // console.log(data);
     // dispatch(login(email, password, navigate))
-  }
+  };
 
   return (
     <form
       onSubmit={handleOnSubmit}
       className="mt-6 flex w-full flex-col gap-y-4"
     >
+      <Tab role={accountType} setRole={setAccountType} />
+
       <label className="w-full">
         <p className="mb-1 text-[0.875rem] leading-[1.375rem]">
           Email Address <sup className="text-pink-200">*</sup>
@@ -85,6 +105,5 @@ const router=useRouter()
         Sign In
       </button>
     </form>
-  )
+  );
 }
-

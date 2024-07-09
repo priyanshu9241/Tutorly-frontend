@@ -5,9 +5,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {    UserIcon,
-      ClockIcon,
-      CalendarIcon, } from "@/components/svg";
+import { UserIcon, ClockIcon, CalendarIcon } from "@/components/svg";
 
 export default function SessionCard(session) {
   return (
@@ -29,7 +27,9 @@ export default function SessionCard(session) {
           <div>
             <h3 className="text-lg font-semibold">{session.subject}</h3>
             {session.topics.map((topic) => (
-              <span className="text-sm text-muted-foreground">{topic + ","} </span>
+              <span className="text-sm text-muted-foreground">
+                {topic + ","}{" "}
+              </span>
             ))}
           </div>
         </div>

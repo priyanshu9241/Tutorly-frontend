@@ -11,7 +11,7 @@ export default function SignupForm() {
 
   const [formData, setFormData] = useState({
     Name: "",
-    address:"",
+    address: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -20,7 +20,7 @@ export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { Name, email, password, confirmPassword,address } = formData;
+  const { Name, email, password, confirmPassword, address } = formData;
 
   // Handle input fields, when some value changes
   const handleOnChange = (e) => {
@@ -31,7 +31,7 @@ export default function SignupForm() {
   };
 
   // Handle Form Submission
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -42,7 +42,19 @@ export default function SignupForm() {
       ...formData,
       accountType,
     };
-
+    const reqUrl =
+      process.env.NEXT_PUBLIC_API_URL +
+      (accountType === "tutor"
+        ? "/api/v1/studentsAuth/register"
+        : "/api/v1/tutorAuth/register");
+    // console.log(reqUrl);
+    const res = await fetch(reqUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupData),
+    });
 
     // Setting signup data to state
     // To be used after otp verification
@@ -56,11 +68,10 @@ export default function SignupForm() {
       email: "",
       password: "",
       confirmPassword: "",
-      address:"",
+      address: "",
     });
-    setAccountType("student")
+    setAccountType("student");
   };
-
 
   return (
     <div>
@@ -71,7 +82,7 @@ export default function SignupForm() {
         <div className=" flex gap-x-4">
           <label className="w-full">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] ">
-               Name <sup className="text-pink-200">*</sup>
+              Name <sup className="text-pink-200">*</sup>
             </p>
             <input
               required
@@ -100,7 +111,7 @@ export default function SignupForm() {
         </label>
         <label className="w-full">
           <p className="mb-1 text-[0.875rem] leading-[1.375rem] ">
-             Address <sup className="text-pink-200">*</sup>
+            Address <sup className="text-pink-200">*</sup>
           </p>
           <input
             required
