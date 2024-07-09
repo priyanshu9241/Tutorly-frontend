@@ -104,7 +104,7 @@ export default function FindTutor({params}) {
         experienceMatch
       );
     });
-  }, [searchTerm, filters]);
+  }, [searchTerm, filters,tutors]);
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };

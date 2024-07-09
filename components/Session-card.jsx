@@ -26,8 +26,8 @@ export default function SessionCard(session) {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <h3 className="text-lg font-semibold">{session.subject}</h3>
-            {session.topics.map((topic) => (
-              <span className="text-sm text-muted-foreground">
+            {session.topics.map((topic, idx) => (
+              <span key={idx} className="text-sm text-muted-foreground">
                 {topic + ","}{" "}
               </span>
             ))}
