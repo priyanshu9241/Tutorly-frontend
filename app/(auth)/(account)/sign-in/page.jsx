@@ -7,9 +7,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Tab from "@/components/Tab";
 import { useUserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
-
-
-import { useRouter } from "next/navigation";
 export default function LoginForm() {
   const router = useRouter();
   const { user,setUser } = useUserContext();
