@@ -30,7 +30,18 @@ export default function User() {
             prefetch={false}
           >
             <UserIcon className="h-4 w-4" />
-            <span>My Profile</span>
+            <span>My Sessions</span>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link
+            href="/update-user"
+            className="flex items-center gap-2"
+            prefetch={false}
+          >
+            <UserIcon className="h-4 w-4" />
+            <span>Update Profile</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
