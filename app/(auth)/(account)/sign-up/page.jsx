@@ -5,22 +5,28 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Tab from "@/components/Tab";
+import { useRouter } from "next/navigation";
+import { useUserContext } from "@/context/userContext";
+
 export default function SignupForm() {
+  const router = useRouter();
+  const { user,setUser } = useUserContext();
+
   // student or tutor
   const [accountType, setAccountType] = useState("student");
 
   const [formData, setFormData] = useState({
     Name: "",
-    address: "",
     email: "",
     password: "",
     confirmPassword: "",
+    phone: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { Name, email, password, confirmPassword, address } = formData;
+  const { Name, email, password, confirmPassword, phone } = formData;
 
   // Handle input fields, when some value changes
   const handleOnChange = (e) => {
@@ -42,12 +48,13 @@ export default function SignupForm() {
       ...formData,
       accountType,
     };
+    console.log(signupData);  
     const reqUrl =
       process.env.NEXT_PUBLIC_API_URL +
       (accountType === "tutor"
-        ? "/api/v1/studentsAuth/register"
-        : "/api/v1/tutorAuth/register");
-    // console.log(reqUrl);
+        ? "/api/v1/tutorsAuth/register"
+        : "/api/v1/studentsAuth/register");
+    console.log(reqUrl);
     const res = await fetch(reqUrl, {
       method: "POST",
       headers: {
@@ -55,6 +62,9 @@ export default function SignupForm() {
       },
       body: JSON.stringify(signupData),
     });
+    const data = await res.json();
+    setUser(data)
+    router.push("/my-sessions")
 
     // Setting signup data to state
     // To be used after otp verification
@@ -68,7 +78,7 @@ export default function SignupForm() {
       email: "",
       password: "",
       confirmPassword: "",
-      address: "",
+      phone: "",
     });
     setAccountType("student");
   };
@@ -111,15 +121,15 @@ export default function SignupForm() {
         </label>
         <label className="w-full">
           <p className="mb-1 text-[0.875rem] leading-[1.375rem] ">
-            Address <sup className="text-pink-200">*</sup>
+            Phone number <sup className="text-pink-200">*</sup>
           </p>
           <input
             required
             type="text"
-            name="address"
-            value={address}
+            name="phone"
+            value={phone}
             onChange={handleOnChange}
-            placeholder="Enter address"
+            placeholder="Enter your Phone number"
             className="form-style w-full"
           />
         </label>

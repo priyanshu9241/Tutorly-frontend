@@ -5,10 +5,14 @@ import Image from "next/image";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // import { useDispatch } from "react-redux"
 import Tab from "@/components/Tab";
+import { useUserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
+
 
 import { useRouter } from "next/navigation";
 export default function LoginForm() {
   const router = useRouter();
+  const { user,setUser } = useUserContext();
   const [accountType, setAccountType] = useState("student");
 
   // const dispatch = useDispatch()
@@ -33,8 +37,8 @@ export default function LoginForm() {
     const reqUrl =
       process.env.NEXT_PUBLIC_API_URL +
       (accountType === "tutor"
-        ? "/api/v1/studentsAuth/login"
-        : "/api/v1/tutorAuth/login");
+        ? "/api/v1/tutorsAuth/login"
+        : "/api/v1/studentsAuth/login");
     // console.log(reqUrl);
     const res = await fetch(reqUrl, {
       method: "POST",
@@ -43,9 +47,11 @@ export default function LoginForm() {
       },
       body: JSON.stringify(formData),
     });
-    // const data = await res.json();
+    const data = await res.json();
     // console.log(data);
-    // dispatch(login(email, password, navigate))
+    
+    setUser(data)
+    router.push("/my-sessions")
   };
 
   return (
