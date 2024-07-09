@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /** Add fonts into your Next.js project:
  
@@ -19,12 +19,12 @@ archivo({
     - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
     - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
     **/
-   import {useState} from "react"
-   import Image from "next/image";
-   import { Button } from "@/components/ui/button";
-   import Link from "next/link";
+import { useState } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import TutorCard from "@/components/TutorCard";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +35,7 @@ import {
   ZapIcon,
   ThumbsUpIcon,
 } from "@/components/svg";
+import Footer from "@/components/Footer";
 import {
   Carousel,
   CarouselContent,
@@ -44,8 +45,8 @@ import {
 } from "@/components/ui/carousel";
 
 export default function Home() {
-  const router=useRouter()
-const [query,setQuery]=useState("")
+  const router = useRouter();
+  const [query, setQuery] = useState("");
   const tutors = [
     {
       id: 1,
@@ -265,16 +266,21 @@ const [query,setQuery]=useState("")
                 </p>
                 <div className="flex gap-2">
                   <Input
-                  value={query}
+                    value={query}
                     type="search"
                     placeholder="Search by subject or grade level"
                     className="flex-1"
-                    onChange={(e)=>{setQuery(e.target.value)}}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                    }}
                   />
-                  <Button onClick={()=>{
-                     router.push(`/find/${query}`)
-                  }}
-                  variant="pro" type="submit">
+                  <Button
+                    onClick={() => {
+                      router.push(`/find/${query}`);
+                    }}
+                    variant="pro"
+                    type="submit"
+                  >
                     Search
                   </Button>
                 </div>
@@ -322,7 +328,7 @@ const [query,setQuery]=useState("")
           <section className="bg-muted py-12 md:py-20">
             <div className=" px-4 md:px-6">
               <div className="grid md:grid-cols-2 gap-8">
-              <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center">
                   <Image
                     src="/tutor1.jpg"
                     width={500}
@@ -367,7 +373,6 @@ const [query,setQuery]=useState("")
                       </div>
                     </div>
                   </div>
-               
                 </div>
               </div>
             </div>
@@ -402,61 +407,7 @@ const [query,setQuery]=useState("")
             </div>
           </section>
         </main>
-        <footer className="bg-muted py-8">
-          <div className="container px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 font-semibold text-lg">
-              <BookIcon className="w-6 h-6" />
-              Tutorly
-            </div>
-            <nav className="flex items-center gap-4">
-              <Link
-                href="#"
-                className="hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                Home
-              </Link>
-              <Link
-                href="#"
-                className="hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                Find a Tutor
-              </Link>
-              <Link
-                href="#"
-                className="hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                Become a Tutor
-              </Link>
-              <Link
-                href="#"
-                className="hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                Pricing
-              </Link>
-              <Link
-                href="#"
-                className="hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                About
-              </Link>
-              <Link
-                href="#"
-                className="hover:underline underline-offset-4"
-                prefetch={false}
-              >
-                Contact
-              </Link>
-            </nav>
-            <div className="text-muted-foreground text-sm">
-              &copy; 2024 Tutorly. All rights reserved.
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </main>
   );
