@@ -15,12 +15,12 @@ export default function layout({ children }) {
               ? "Join the millions learning new skills with Tutorly"
               : "Welcome Back"}
           </h1>
-          <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
-            <div>Education to future-proof your career</div>
-            <span className="font-edu-sa font-bold italic text-blue-100">
+          <div className="mt-4 text-[1.125rem] leading-[1.625rem]">
+            <p>Education to future-proof your career</p>
+            <span className="font-edu-sa font-bold italic text-red-700">
               Build skills for today, tomorrow, and beyond
             </span>
-          </p>
+          </div>
           {children}
         </div>
         <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
