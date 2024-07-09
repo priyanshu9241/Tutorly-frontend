@@ -271,7 +271,7 @@ export default function Home() {
                 </form>
               </div>
               <div>
-                <img
+                <Image
                   src="/tutor2.jpg"
                   width={600}
                   height={400}
@@ -314,7 +314,7 @@ export default function Home() {
             <div className=" px-4 md:px-6">
               <div className="grid md:grid-cols-2 gap-8">
               <div className="flex items-center justify-center">
-                  <img
+                  <Image
                     src="/tutor1.jpg"
                     width={500}
                     height={400}

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import Image from 'next/image'
 import { usePathname } from "next/navigation";
 export default function Layout({ children }) {
   const pathname = usePathname();
@@ -23,14 +23,14 @@ export default function Layout({ children }) {
           {children}
         </div>
         <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
-          <img
+          <Image
             src="/frame.png"
             alt="Pattern"
             width={558}
             height={504}
             loading="lazy"
           />
-          <img
+          <Image
             src={imgPath}
             alt="Students"
             width={558}

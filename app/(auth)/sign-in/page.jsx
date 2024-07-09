@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import Link from "next/link";
-
+import Image from 'next/image'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 // import { useDispatch } from "react-redux"
 

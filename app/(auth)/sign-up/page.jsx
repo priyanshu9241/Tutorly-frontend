@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-
+import Image from 'next/image'
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"

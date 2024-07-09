@@ -19,6 +19,7 @@ import {
   StarIcon,
   BookIcon,
 } from "@/components/svg";
+import Image from 'next/image'
 
 export default function Component() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -303,12 +304,12 @@ export default function Component() {
       <div className="grid gap-6">
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredTutors.map((tutor) => (
-           <Link href={`tutor/${tutor.id}`}>
+           <Link  key={tutor.id} href={`tutor/${tutor.id}`}>
             <div
-              key={tutor.id}
+             
               className="bg-background rounded-lg shadow-lg overflow-hidden"
             >
-              <img
+              <Image
                 src="/placeholder.svg"
                 alt={tutor.name}
                 width={300}

@@ -11,6 +11,7 @@ import {
   BadgeIcon,
   TrophyIcon,
 } from "@/components/svg";
+import Image from 'next/image'
 
 export default function TutorProfile() {
   return (
@@ -18,7 +19,7 @@ export default function TutorProfile() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-background rounded-lg shadow-lg overflow-hidden">
           <div className="h-64 md:h-80 bg-muted">
-            <img
+            <Image
               src="/placeholder.svg"
               alt="Tutor Image"
               width={800}
