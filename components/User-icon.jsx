@@ -25,7 +25,7 @@ export default function User() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
           <Link
-            href="/update-user"
+            href="/my-sessions"
             className="flex items-center gap-2"
             prefetch={false}
           >
