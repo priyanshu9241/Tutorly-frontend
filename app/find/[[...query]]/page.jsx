@@ -21,8 +21,9 @@ import {
 } from "@/components/svg";
 import Image from 'next/image'
 
-export default function Component() {
-  const [searchTerm, setSearchTerm] = useState("");
+export default function FindTutor({params}) {
+  const{query}=params
+  const [searchTerm, setSearchTerm] = useState(query&&query[0]||"");
   const [filters, setFilters] = useState({
     rating: [],
     subject: [],

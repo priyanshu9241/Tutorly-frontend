@@ -1,28 +1,30 @@
-import Image from "next/image";
+"use client"
 
 /** Add fonts into your Next.js project:
-
+ 
 import { Archivo } from 'next/font/google'
 import { Libre_Franklin } from 'next/font/google'
 
 archivo({
   subsets: ['latin'],
   display: 'swap',
-})
-
-libre_franklin({
-  subsets: ['latin'],
-  display: 'swap',
-})
-
-To read more about using these font, please visit the Next.js documentation:
-- App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
-- Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
-**/
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+  })
+  
+  libre_franklin({
+    subsets: ['latin'],
+    display: 'swap',
+    })
+    
+    To read more about using these font, please visit the Next.js documentation:
+    - App Directory: https://nextjs.org/docs/app/building-your-application/optimizing/fonts
+    - Pages Directory: https://nextjs.org/docs/pages/building-your-application/optimizing/fonts
+    **/
+   import {useState} from "react"
+   import Image from "next/image";
+   import { Button } from "@/components/ui/button";
+   import Link from "next/link";
 import { Input } from "@/components/ui/input";
-
+import { useRouter } from 'next/navigation'
 import TutorCard from "@/components/TutorCard";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -42,6 +44,8 @@ import {
 } from "@/components/ui/carousel";
 
 export default function Home() {
+  const router=useRouter()
+const [query,setQuery]=useState("")
   const tutors = [
     {
       id: 1,
@@ -259,16 +263,21 @@ export default function Home() {
                   Browse our network of experienced tutors and find the right
                   one to help you achieve your academic goals.
                 </p>
-                <form className="flex gap-2">
+                <div className="flex gap-2">
                   <Input
+                  value={query}
                     type="search"
                     placeholder="Search by subject or grade level"
                     className="flex-1"
+                    onChange={(e)=>{setQuery(e.target.value)}}
                   />
-                  <Button variant="pro" type="submit">
+                  <Button onClick={()=>{
+                     router.push(`/find/${query}`)
+                  }}
+                  variant="pro" type="submit">
                     Search
                   </Button>
-                </form>
+                </div>
               </div>
               <div>
                 <Image
@@ -288,7 +297,7 @@ export default function Home() {
                   Featured Tutors
                 </h2>
                 <Link
-                  href="#"
+                  href="/find"
                   className="text-primary hover:underline underline-offset-4"
                   prefetch={false}
                 >
@@ -370,7 +379,7 @@ export default function Home() {
                   Top Rated Tutors
                 </h2>
                 <Link
-                  href="#"
+                  href="find"
                   className="text-primary hover:underline underline-offset-4"
                   prefetch={false}
                 >
