@@ -1,57 +1,48 @@
-"use client"
+"use client";
 import Link from "next/link";
-import Image from 'next/image'
-import { useState } from "react"
-import { toast } from "react-hot-toast"
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-// import { useDispatch } from "react-redux"
-// import { useNavigate } from "react-router-dom"
-
-// import { sendOtp } from "../../../Service/Operation/authAPI"
-// import { setSignupData } from "../../../Slice/authSlice"
-// import { ACCOUNT_TYPE } from "../../../Util/constants"
-// import Tab from "../../Common/Tab"
-export default 
-function SignupForm() {
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch()
-
-  // student or instructor
-  const [accountType, setAccountType] = useState("student")
+import Image from "next/image";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Tab from "@/components/Tab";
+export default function SignupForm() {
+  // student or tutor
+  const [accountType, setAccountType] = useState("student");
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    Name: "",
+    address:"",
     email: "",
     password: "",
     confirmPassword: "",
-  })
+  });
 
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const { firstName, lastName, email, password, confirmPassword } = formData
+  const { Name, email, password, confirmPassword,address } = formData;
 
   // Handle input fields, when some value changes
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   // Handle Form Submission
   const handleOnSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error("Passwords Do Not Match")
-      return
+      toast.error("Passwords Do Not Match");
+      return;
     }
     const signupData = {
       ...formData,
       accountType,
-    }
+    };
+
 
     // Setting signup data to state
     // To be used after otp verification
@@ -61,61 +52,34 @@ function SignupForm() {
 
     // Reset
     setFormData({
-      firstName: "",
-      lastName: "",
+      Name: "",
       email: "",
       password: "",
       confirmPassword: "",
-    })
-    // setAccountType(ACCOUNT_TYPE.STUDENT)
-  }
+      address:"",
+    });
+    setAccountType("student")
+  };
 
-  // // data to pass to Tab component
-  // const tabData = [
-  //   {
-  //     id: 1,
-  //     tabName: "Student",
-  //     type: ACCOUNT_TYPE.STUDENT,
-  //   },
-  //   {
-  //     id: 2,
-  //     tabName: "Instructor",
-  //     type: ACCOUNT_TYPE.INSTRUCTOR,
-  //   },
-  // ]
 
   return (
-    <div >
+    <div>
       {/* Tab */}
-      {/* <Tab tabData={tabData} field={accountType} setField={setAccountType} /> */}
+      <Tab role={accountType} setRole={setAccountType} />
       {/* Form */}
       <form onSubmit={handleOnSubmit} className="flex w-full flex-col gap-y-4">
         <div className=" flex gap-x-4">
-          <label>
+          <label className="w-full">
             <p className="mb-1 text-[0.875rem] leading-[1.375rem] ">
-              First Name <sup className="text-pink-200">*</sup>
+               Name <sup className="text-pink-200">*</sup>
             </p>
             <input
               required
               type="text"
-              name="firstName"
-              value={firstName}
+              name="Name"
+              value={Name}
               onChange={handleOnChange}
-              placeholder="Enter first name"
-              className="form-style w-full"
-            />
-          </label>
-          <label>
-            <p className="mb-1 text-[0.875rem] leading-[1.375rem] ">
-              Last Name <sup className="text-pink-200">*</sup>
-            </p>
-            <input
-              required
-              type="text"
-              name="lastName"
-              value={lastName}
-              onChange={handleOnChange}
-              placeholder="Enter last name"
+              placeholder="Enter name"
               className="form-style w-full"
             />
           </label>
@@ -131,6 +95,20 @@ function SignupForm() {
             value={email}
             onChange={handleOnChange}
             placeholder="Enter email address"
+            className="form-style w-full"
+          />
+        </label>
+        <label className="w-full">
+          <p className="mb-1 text-[0.875rem] leading-[1.375rem] ">
+             Address <sup className="text-pink-200">*</sup>
+          </p>
+          <input
+            required
+            type="text"
+            name="address"
+            value={address}
+            onChange={handleOnChange}
+            placeholder="Enter address"
             className="form-style w-full"
           />
         </label>
@@ -192,6 +170,5 @@ function SignupForm() {
         </button>
       </form>
     </div>
-  )
+  );
 }
-
