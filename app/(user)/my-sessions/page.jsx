@@ -203,10 +203,11 @@ export default function MySessions() {
           </div>
         </div>
         <div className="grid gap-4">
+          
           {selectedFilter === "upcoming" && (
             <>
-              {sessions.upcomingSessions.map((session) => SessionCard(session))}
-              {/* <Card>
+              {/* {sessions.upcomingSessions.map((session,idx) => <SessionCard key={idx} session={session}/>)} */}
+              <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -291,14 +292,14 @@ export default function MySessions() {
                     </Button>
                   </div>
                 </CardFooter>
-              </Card> */}
+              </Card>
             </>
           )}
           {selectedFilter === "past" && (
             <>
-              {sessions.PastBookings.map((session) => SessionCard(session))}
+              {/* {sessions.PastBookings.map((session,idx) => <SessionCard key={idx} session={session}/>)} */}
 
-              {/* <Card>
+              <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -379,14 +380,14 @@ export default function MySessions() {
                     </Button>
                   </div>
                 </CardFooter>
-              </Card> */}
+              </Card>
             </>
           )}
           {selectedFilter === "current" && (
             <>
-              {sessions.CurrentBookings.map((session) => SessionCard(session))}
+              {/* {sessions.CurrentBookings.map((session,idx) => <SessionCard key={idx} session={session}/>)} */}
 
-              {/* <Card>
+              <Card>
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -430,7 +431,7 @@ export default function MySessions() {
                     </Button>
                   </div>
                 </CardFooter>
-              </Card> */}
+              </Card>
             </>
           )}
         </div>

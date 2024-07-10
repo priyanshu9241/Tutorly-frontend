@@ -2,13 +2,10 @@
 import Link from "next/link";
 import { BookIcon } from "@/components/svg";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
 import User from "@/components/User-icon"
+import {useUserContext} from "@/context/userContext"
 export default function Nav() {
-  useEffect(() => { 
-
-}, [])
-    // const userImg=
+  const {isAuthenticated} = useUserContext()
   return (
     <header className="bg-primary text-primary-foreground">
       <div className="container md:pl-4  py-6 md:py-8 flex items-center justify-between">
@@ -51,11 +48,11 @@ export default function Nav() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <div>
-            <User/>
+         { isAuthenticated&&
+            <User/>}
 
-          </div>
-          <Link href="sign-in" prefetch={false}>
+          
+        {!isAuthenticated&& <> <Link href="sign-in" prefetch={false}>
             <Button variant="pro" size="sm">
               Sign In
             </Button>
@@ -64,7 +61,7 @@ export default function Nav() {
             <Button variant="pro" size="sm">
               Sign Up
             </Button>
-          </Link>
+          </Link></>}
         </div>
       </div>
     </header>

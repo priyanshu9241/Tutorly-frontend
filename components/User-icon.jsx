@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
 import { UserIcon, LogOutIcon } from "@/components/svg";
+import { getCookie,setCookie,deleteCookie } from "cookies-next";
+
 
 export default function User() {
   return (
@@ -46,10 +48,23 @@ export default function User() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="#" className="flex items-center gap-2" prefetch={false}>
+          <Button onClick={async ()=>{
+            const role=getCookie("role")
+            const reqUrl =
+            process.env.NEXT_PUBLIC_API_URL +
+            (role === "tutor"
+              ? "/api/v1/tutorsAuth/logout"
+              : "/api/v1/studentsAuth/logout");
+          console.log(reqUrl);
+          const res = await fetch(reqUrl)
+          // console.log(await res.json())
+          deleteCookie("token")
+          deleteCookie("role")
+
+          }}className="flex items-center gap-2">
             <LogOutIcon className="h-4 w-4" />
             <span>Logout</span>
-          </Link>
+          </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

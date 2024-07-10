@@ -8,7 +8,6 @@ import Nav from "@/components/Nav";
 import { useContext } from "react";
 import UserContextProvider from "@/context/userContext";
 import { Toaster } from "react-hot-toast";
-
 const fontHeading = Inter({
   subsets: ["latin"],
   display: "swap",

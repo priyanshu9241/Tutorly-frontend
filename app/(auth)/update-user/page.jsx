@@ -1,19 +1,42 @@
 "use client";
+import { useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+
 import { Button } from "@/components/ui/button";
+import { getCookie, setCookie } from "cookies-next";
+
 import { UploadIcon } from "@/components/svg";
 import { useUserContext } from "@/context/userContext";
 import { useState } from "react";
 export default function Component() {
-  const { user } = useUserContext();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const role = getCookie("role");
+      const reqUrl =
+        // process.env.NEXT_PUBLIC_API_URL +
+        "https://tutor-booking-platform.onrender.com" +
+        (role === "tutor" ? "/api/v1/tutors/me" : "/api/v1/students/me");
+      console.log(reqUrl);
+      const res = await fetch(reqUrl, { credentials: "include" });
+      console.log(res)
+      return res;
+    };
+    try {
+      setUser(fetchUser());
+    } catch {
+      console.log("profile error");
+    }
+  }, []);
+  // const { user } = useUserContext();
   // console.log(user)
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
-  const [adress, setAdress] = useState(user.adress);
-  const [file, setFile] = useState(user.file);
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [phoneNumber, setPhoneNumber] = useState(user?.phoneNumber);
+  const [adress, setAdress] = useState(user?.adress);
+  const [file, setFile] = useState(user?.file);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

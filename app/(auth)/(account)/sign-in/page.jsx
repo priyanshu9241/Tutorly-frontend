@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-// import { useDispatch } from "react-redux"
+import { getCookie,setCookie } from "cookies-next";
 import Tab from "@/components/Tab";
 import { useUserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
@@ -11,8 +11,6 @@ export default function LoginForm() {
   const router = useRouter();
   const { user,setUser } = useUserContext();
   const [accountType, setAccountType] = useState("student");
-
-  // const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -45,8 +43,11 @@ export default function LoginForm() {
       body: JSON.stringify(formData),
     });
     const data = await res.json();
+    setCookie("token",data.token)
+    setCookie("role",accountType)
+    // console.log(getCookie("token"))
     // console.log(data);
-    
+    if(getCookie("token"))
     setUser(data)
     router.push("/my-sessions")
   };

@@ -10,7 +10,7 @@ import { useUserContext } from "@/context/userContext";
 
 export default function SignupForm() {
   const router = useRouter();
-  const { user,setUser } = useUserContext();
+  const { user, setUser } = useUserContext();
 
   // student or tutor
   const [accountType, setAccountType] = useState("student");
@@ -39,32 +39,40 @@ export default function SignupForm() {
   // Handle Form Submission
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      toast.error("Passwords Do Not Match");
+    try {
+      if (password !== confirmPassword) {
+        toast.error("Passwords Do Not Match");
+        return;
+      }
+      const signupData = {
+        name:Name,
+        phoneNumber:phone,
+        address:"",
+        ...formData,
+        accountType,
+      };
+      // console.log(signupData);
+      const reqUrl =
+        process.env.NEXT_PUBLIC_API_URL +
+        (accountType === "tutor"
+          ? "/api/v1/tutorsAuth/register"
+          : "/api/v1/studentsAuth/register");
+      console.log(reqUrl);
+      const res = await fetch(reqUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupData),
+      });
+      // const data = await res.json();
+// console.log(data)
+      // setUser(data);
+      router.push("/sign-in");
+    } catch {
+      toast.error("Something went wrong");
       return;
     }
-    const signupData = {
-      ...formData,
-      accountType,
-    };
-    console.log(signupData);  
-    const reqUrl =
-      process.env.NEXT_PUBLIC_API_URL +
-      (accountType === "tutor"
-        ? "/api/v1/tutorsAuth/register"
-        : "/api/v1/studentsAuth/register");
-    console.log(reqUrl);
-    const res = await fetch(reqUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signupData),
-    });
-    const data = await res.json();
-    setUser(data)
-    router.push("/my-sessions")
 
     // Setting signup data to state
     // To be used after otp verification
